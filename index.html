@@ -1,0 +1,57 @@
+<html>
+  <head>
+      <title>Java Users</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  </head>
+  <body>
+      <h1 style="font-family: Arial, Helvetica, sans-serif; text-align: center; color: #444;margin-top: 5%;">Devices running Java (in billions)</h1>
+    <div class="chartjs-wrapper" style="max-width: 1200px; margin: auto;">
+      <canvas
+        id="chartjs-1"
+        class="chartjs"
+        width="undefined"
+        height="undefined"
+      ></canvas>
+      <script>
+
+        var curYear = new Date().getFullYear() + 1;
+        var yearLabels = [...Array(curYear - 1994).keys()].map(i => i + 1994);
+        var userData = [...Array(curYear - 1994).keys()].map(i => 3);
+        var cols = [];
+
+        for (var i = 0; i < curYear - 1994; i++) {
+            if (i % 2 == 0) {
+                cols.push("rgba(255, 0, 0, 0.6)");
+            } else {
+                cols.push("rgba(0, 255, 0, 0.6)");
+            }
+        }
+
+        console.log(cols);
+
+        new Chart(document.getElementById("chartjs-1"), {
+          type: "bar",
+          data: {
+            labels: yearLabels,
+            datasets: [
+              {
+                label: "Devices running Java (in billions)",
+                data: userData,
+                fill: false,
+                backgroundColor: cols,
+                borderColor: cols,
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: { 
+            legend: {display: false},
+              scales: { 
+                  yAxes: [{ ticks: { beginAtZero: true, max: 3.5 } }] 
+                } 
+            },
+        });
+      </script>
+    </div>
+  </body>
+</html>
